@@ -33,7 +33,7 @@ app.add_middleware(
 
 # Load the model
 try:
-    model = load_model('/content/drive/MyDrive/best_model.keras')  # Confirm the model path is correct
+    model = load_model('best_model.keras')  # Confirm the model path is correct
     logger.info("Model loaded successfully.")
 except Exception as e:
     logger.error(f"Failed to load model: {e}")
