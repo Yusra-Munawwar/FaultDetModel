@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 tensorflow
-pillow
+Pillow
 python-multipart
 nest-asyncio
-pyngrok
+numpy
