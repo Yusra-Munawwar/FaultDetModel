@@ -5,3 +5,5 @@ Pillow
 python-multipart
 nest-asyncio
 numpy
+requests
+

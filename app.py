@@ -11,6 +11,8 @@ from PIL import Image
 import uvicorn
 import logging
 import nest_asyncio
+import os
+import requests
 
 # Apply nest_asyncio to avoid event loop issues
 nest_asyncio.apply()
@@ -31,9 +33,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Dropbox direct link for the model file
+model_url = 'https://www.dropbox.com/scl/fi/zohbshw4ihgvlcw3fqfhh/best_model.keras?rlkey=m5bkm3udewhtzw3lyeoilmx72&dl=1'
+model_path = 'best_model.keras'
+
+# Download the model if it doesn't already exist
+if not os.path.exists(model_path):
+    try:
+        logger.info("Downloading model from Dropbox...")
+        response = requests.get(model_url)
+        with open(model_path, 'wb') as f:
+            f.write(response.content)
+        logger.info("Model downloaded successfully.")
+    except Exception as e:
+        logger.error(f"Failed to download model: {e}")
+        raise HTTPException(status_code=500, detail="Failed to download model")
+
 # Load the model
 try:
-    model = load_model('best_model.keras')  # Confirm the model path is correct
+    model = load_model(model_path)
     logger.info("Model loaded successfully.")
 except Exception as e:
     logger.error(f"Failed to load model: {e}")
@@ -163,3 +181,4 @@ async def predict(file: UploadFile = File(...)):
 # Main block for FastAPI server
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
