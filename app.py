@@ -11,8 +11,11 @@ from PIL import Image
 import uvicorn
 import logging
 import nest_asyncio
-import os
+
 import requests
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Disable GPU
+
 
 # Apply nest_asyncio to avoid event loop issues
 nest_asyncio.apply()
