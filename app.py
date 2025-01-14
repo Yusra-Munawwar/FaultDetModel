@@ -1,4 +1,6 @@
 # Import necessary packages
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Disable GPU
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,8 +15,7 @@ import logging
 import nest_asyncio
 
 import requests
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Disable GPU
+
 
 
 # Apply nest_asyncio to avoid event loop issues
