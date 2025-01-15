@@ -1,6 +1,6 @@
 fastapi
+tensorflow-cpu
 uvicorn
-tensorflow
 Pillow
 python-multipart
 nest-asyncio
