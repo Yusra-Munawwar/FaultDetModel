@@ -1,6 +1,8 @@
 # Import necessary packages
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = ""  # Disable GPU
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"  # Suppress TensorFlow info/warning logs
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"  # Disable GPU explicitly
+
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
